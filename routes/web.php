@@ -14,9 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
-Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallback');
+//  Prefix and Group Route 
+Route::prefix('login')->group(function () {
+    Route::get('{service}', 'Auth\LoginController@redirectToProvider');
+    Route::get('{service}/callback', 'Auth\LoginController@handleProviderCallback');
+});
 
 Auth::routes();
 
